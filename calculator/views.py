@@ -28,3 +28,13 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def recipe_view(request, dish):
+    servings = int(request.GET.get('servings', 1))
+    context = {
+        'recipe': {
+            ingridient: amount * servings 
+            for ingridient, amount 
+            in DATA.get(dish).items()
+        }
+    }
+    return render(request, 'calculator/index.html', context)
